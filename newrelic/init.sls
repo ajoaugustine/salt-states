@@ -7,11 +7,6 @@ newrelic-ppa:
     - name: deb http://apt.newrelic.com/debian/ newrelic non-free
     - key_url: http://download.newrelic.com/548C16BF.gpg
 
-newrelic-php5:
-  pkg.installed:
-    - require:
-      - pkgrepo: newrelic-ppa
-
 newrelic-sysmond:
   pkg.installed:
     - require:
@@ -30,14 +25,6 @@ newrelic-sysmond-conf:
     - template: jinja
     - require:
       - pkg: newrelic-sysmond
-
-/etc/php5/fpm/conf.d/newrelic.ini:
-  file.managed:
-    - source: salt://newrelic/newrelic.ini
-    - template: jinja
-    - require:
-      - pkg: newrelic-php5
-      - pkgrepo: newrelic-ppa
 
 newrelic-plugin-agent:
   pip.installed
